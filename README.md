@@ -91,7 +91,7 @@ The steps to creating a Newton Redux module are:
 
 ### Handling Changes with Multiple Pieces of State
 
-If you are listening to multiple pieces of state but you only want action to be taken when a specific piece of state changes, you may access the `changeMap` which is passed in to `onChange` on every call. The `changeMap` and how you access it would look like this.
+If you are listening to multiple pieces of state but you only want action to be taken when a specific piece of state changes, you may access the `changeMap` which is passed in to `onChange` on every call. The `changeMap` consists of an object with the same keys that you defined in `mapStateToProps`. `hasChanged` is a boolean that lets you know if that particular key has changed. You may also access the `previousValue` of that piece of state. The `changeMap` and how you access it would look like this.
 
 ```js
 // passed in to onChange handler on every call
@@ -113,7 +113,7 @@ onChange (changeMap) {
     // React ONLY if womp changes
   }
 
-  if (changeMap.someOtherPieceOfState) {
+  if (changeMap.someOtherPieceOfState.hasChanged) {
     // React ONLY if someOtherPieceOfState changes
   }
 
