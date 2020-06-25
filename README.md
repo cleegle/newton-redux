@@ -122,3 +122,23 @@ onChange (changeMap) {
 ```
 
 As modules grow more complicated and begin listening to multiple pieces of state, the `changeMap` will be necessary to control the flow within modules.
+
+### Unsubscribing
+
+Sometimes, a class no longer needs to be connected to the store. In this case, you may call `this.unsubscribe()` to unsubscribe your class.
+
+```js
+class User extends Module {
+  constructor(props) {
+    super(props);
+
+    // ...
+
+    window.addEventListener("beforeunload", () => {
+      this.unsubscribe();
+    });
+  }
+
+  // ...
+}
+```

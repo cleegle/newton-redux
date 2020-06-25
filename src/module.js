@@ -11,4 +11,9 @@ export default class Module {
   setProps (newProps) {
     this.props = newProps;
   }
+
+  // This will be overriden by connect().
+  unsubscribe () {
+    console.error('newton-redux: You cannot unsubscribe from the store in your constructor.')
+  }
 }

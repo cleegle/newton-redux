@@ -31,6 +31,8 @@ export default function connect (
 
       subscribe () {
         this._unsubscribe = this.store.subscribe(this.handleChange.bind(this));
+
+        this.instance.unsubscribe = this.unsubscribe.bind(this);
       }
 
       unsubscribe () {

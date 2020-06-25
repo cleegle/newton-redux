@@ -21,7 +21,8 @@ const ConnectedTest = connect(
   mapDispatchToProps
 )(Test);
 
-function unsubscribe () {}
+// function unsubscribe () {}
+const unsubscribe = jest.fn();
 function dispatch () {}
 function setWomp () {}
 
@@ -103,4 +104,11 @@ describe('connect', () => {
     expect(test._unsubscribe).not.toBeNull();
     expect(test._unsubscribe).not.toBeUndefined();
   });
+
+  it('should unsubscribe when asked', () => {
+    test.subscribe();
+    expect(test._unsubscribe).toBe(unsubscribe);
+    test.instance.unsubscribe();
+    expect(test._unsubscribe).toBe(null);
+  })
 });
