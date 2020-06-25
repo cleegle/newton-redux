@@ -1,6 +1,6 @@
 // @author Chris Lee
 
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 // The wrapped component is able to:
 // 1) React to state changes that it cares about
@@ -52,7 +52,7 @@ export default function connect (
         let stateChangeOccurred = false;
 
         Object.keys(newState).forEach(key => {
-          if (!_.isEqual(this.currentState[key], newState[key])) {
+          if (!isEqual(this.currentState[key], newState[key])) {
             stateChangeOccurred = true;
             changeMap[key] = {
               hasChanged: true,
