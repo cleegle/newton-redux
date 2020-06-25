@@ -21,8 +21,7 @@ const ConnectedTest = connect(
   mapDispatchToProps
 )(Test);
 
-// function unsubscribe () {}
-const unsubscribe = jest.fn();
+function unsubscribe () {}
 function dispatch () {}
 function setWomp () {}
 
