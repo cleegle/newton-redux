@@ -1,8 +1,8 @@
-# Newton Redux
+# Newton Redux Reborn
 
 A simple utility to connect plain JavaScript classes to redux.
 
-[![Build Status](https://api.travis-ci.org/cleegle/newton-redux.svg?branch=master)](https://travis-ci.org/cleegle/newton-redux)
+A maintained fork of [cleegle/newton-redux](https://github.com/cleegle/newton-redux).
 
 ## Introduction
 
@@ -11,7 +11,13 @@ Inspired by [`react-redux`](https://github.com/reactjs/react-redux), Newton Redu
 ## Install
 
 ```
-npm install --save newton-redux
+npm install --save newton-redux-reborn
+```
+
+or
+
+```
+yarn add newton-redux-reborn
 ```
 
 ## Usage
@@ -19,7 +25,7 @@ npm install --save newton-redux
 A Newton Redux module looks like the following.
 
 ```js
-import { Module, connect } from 'newton-redux';
+import { Module, connect } from 'newton-redux-reborn';
 import { setWomp } from './actions/user';
 
 class User extends Module {
