@@ -1,6 +1,6 @@
 {
   "name": "newton-redux-reborn",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Class bindings for Redux",
   "main": "lib/index.js",
   "scripts": {

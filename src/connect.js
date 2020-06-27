@@ -79,7 +79,14 @@ export default function connect (
       // to the call to onChange
       setModuleProps () {
         this.instance.setProps(this.getProps());
-        this.instance.onChange(this.changeMap);
+        if(this.instance.onChange) {
+          if(typeof this.instance.onChange === "function") {
+            this.instance.onChange(this.changeMap);
+          } else {
+            throw new Error(`newton-redux-reborn: If you have an onChange property on your class, it must be a function.
+            Your onChange property is of type ${typeof this.instance.onChange}.`)
+          }
+        }
       }
 
       getProps () {

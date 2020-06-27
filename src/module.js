@@ -14,6 +14,6 @@ export default class Module {
 
   // This will be overriden by connect().
   unsubscribe () {
-    console.error('newton-redux: You cannot unsubscribe from the store in your constructor.')
+    throw new Error('newton-redux-reborn: You cannot unsubscribe from the store in your constructor.')
   }
 }
