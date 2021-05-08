@@ -1,4 +1,4 @@
-import { Module } from '../../src';
+import { Module } from '../../index.js';
 
 describe('module', () => {
   it('should set props on the instance if passed into the constructor', () => {

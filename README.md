@@ -2,7 +2,7 @@
 
 A simple utility to connect plain JavaScript classes to redux.
 
-A maintained fork of [cleegle/newton-redux](https://github.com/cleegle/newton-redux).
+A maintained fork of [cleegle/newton-redux](https://github.com/cleegle/newton-redux) with unsubscribe and TypeScript support.
 
 ## Introduction
 
@@ -19,6 +19,8 @@ or
 ```
 yarn add newton-redux-reborn
 ```
+
+TypeScript definitions are part of the module.
 
 ## Usage
 
@@ -148,3 +150,9 @@ class User extends Module {
   // ...
 }
 ```
+
+### TypeScript Usage
+
+You'll need to define a type for your dispatch and state props. The best way to explain how to do this is just by example.
+
+You can see a full, commented, implemented example of `newton-redux-reborn` [here](examples/typescript.ts).
