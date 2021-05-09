@@ -1,4 +1,4 @@
-import { Module, connect } from '../../index.js';
+import { Module, connect } from '../../src/index';
 
 class Test extends Module {}
 Test.prototype.onChange = jest.fn();

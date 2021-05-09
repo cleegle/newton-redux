@@ -1,10 +1,12 @@
 import { createStore } from "redux";
-import { module, Connect, ChangeMap } from "newton-redux-reborn";
+import { Module, connect, ChangeMap } from "newton-redux-reborn";
 
 // Redux store setup
+// You likely have this in a separate file; that's ok.
+// Some types are exported here (like StoreState, those are required to type newton-redux-reborn).
 type Todo = string;
 
-interface StoreState {
+export interface StoreState {
   todos: Todo[];
   done_todos: Todo[];
 }
@@ -14,24 +16,24 @@ const MarkTodoAsDoneAction = "MARK_TODO_AS_DONE";
 
 type StoreActions = AddTodoAction | MarkTodoAsDoneAction;
 
-interface AddTodoAction {
+export interface AddTodoAction {
   type: typeof AddTodoAction;
   todo: Todo;
 }
 
-interface MarkTodoAsDoneAction {
+export interface MarkTodoAsDoneAction {
   type: typeof MarkTodoAsDoneAction;
   todo: Todo;
 }
 
-function addTodoAction(todo: Todo): AddTodoAction {
+export function addTodoAction(todo: Todo): AddTodoAction {
   return {
     type: AddTodoAction,
     todo,
   };
 }
 
-function markTodoAsDoneAction(todo: Todo): MarkTodoAsDoneAction {
+export function markTodoAsDoneAction(todo: Todo): MarkTodoAsDoneAction {
   return {
     type: MarkTodoAsDoneAction,
     todo,
@@ -95,9 +97,14 @@ interface TodosManagerStateProps {
 
 // all dispatch functions returned from your mapDispatchToProps function.
 interface TodosManagerDispatchProps {
+  // addDefaultTodo has a different signature than addTodoAction (the action creator), but returns an AddTodoAction.
   addDefaultTodo: () => AddTodoAction;
-  addTodo: (todo: Todo) => AddTodoAction;
-  markTodoAsDone: (todo: Todo) => MarkTodoAsDoneAction;
+  // Most of the time, if the dispatches follow the same signature as the action creators,
+  // you can just use typeof ActionCreator. This way, if the action creator's signature changes,
+  // each class that has dispatch props on it won't need its types changed.
+  addTodo: typeof addTodoAction;
+  // Remember: these are the types of the action CREATORS (functions)-- not the types of the actions themselves.
+  markTodoAsDone: typeof markTodoAsDoneAction;
 }
 
 // a union of state and dispatch props: this will be the type of Module.props.
