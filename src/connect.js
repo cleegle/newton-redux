@@ -1,6 +1,6 @@
 // @author Chris Lee
 
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 // The wrapped component is able to:
 // 1) React to state changes that it cares about
@@ -31,6 +31,8 @@ export default function connect (
 
       subscribe () {
         this._unsubscribe = this.store.subscribe(this.handleChange.bind(this));
+
+        this.instance.unsubscribe = this.unsubscribe.bind(this);
       }
 
       unsubscribe () {
@@ -50,7 +52,7 @@ export default function connect (
         let stateChangeOccurred = false;
 
         Object.keys(newState).forEach(key => {
-          if (!_.isEqual(this.currentState[key], newState[key])) {
+          if (!isEqual(this.currentState[key], newState[key])) {
             stateChangeOccurred = true;
             changeMap[key] = {
               hasChanged: true,
@@ -77,7 +79,14 @@ export default function connect (
       // to the call to onChange
       setModuleProps () {
         this.instance.setProps(this.getProps());
-        this.instance.onChange(this.changeMap);
+        if(this.instance.onChange) {
+          if(typeof this.instance.onChange === "function") {
+            this.instance.onChange(this.changeMap);
+          } else {
+            throw new Error(`newton-redux-reborn: If you have an onChange property on your class, it must be a function.
+            Your onChange property is of type ${typeof this.instance.onChange}.`)
+          }
+        }
       }
 
       getProps () {

@@ -1,4 +1,4 @@
-import { Module, connect } from '../../src';
+import { Module, connect } from '../../src/index';
 
 class Test extends Module {}
 Test.prototype.onChange = jest.fn();
@@ -103,4 +103,11 @@ describe('connect', () => {
     expect(test._unsubscribe).not.toBeNull();
     expect(test._unsubscribe).not.toBeUndefined();
   });
+
+  it('should unsubscribe when asked', () => {
+    test.subscribe();
+    expect(test._unsubscribe).toBe(unsubscribe);
+    test.instance.unsubscribe();
+    expect(test._unsubscribe).toBe(null);
+  })
 });

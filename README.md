@@ -1,8 +1,8 @@
-# Newton Redux
+# Newton Redux Reborn
 
 A simple utility to connect plain JavaScript classes to redux.
 
-[![Build Status](https://api.travis-ci.org/cleegle/newton-redux.svg?branch=master)](https://travis-ci.org/cleegle/newton-redux)
+A maintained fork of [cleegle/newton-redux](https://github.com/cleegle/newton-redux) with unsubscribe and TypeScript support.
 
 ## Introduction
 
@@ -11,15 +11,23 @@ Inspired by [`react-redux`](https://github.com/reactjs/react-redux), Newton Redu
 ## Install
 
 ```
-npm install --save newton-redux
+npm install --save newton-redux-reborn
 ```
+
+or
+
+```
+yarn add newton-redux-reborn
+```
+
+TypeScript definitions are part of the module.
 
 ## Usage
 
 A Newton Redux module looks like the following.
 
 ```js
-import { Module, connect } from 'newton-redux';
+import { Module, connect } from 'newton-redux-reborn';
 import { setWomp } from './actions/user';
 
 class User extends Module {
@@ -122,3 +130,29 @@ onChange (changeMap) {
 ```
 
 As modules grow more complicated and begin listening to multiple pieces of state, the `changeMap` will be necessary to control the flow within modules.
+
+### Unsubscribing
+
+Sometimes, a class no longer needs to be connected to the store. In this case, you may call `this.unsubscribe()` to unsubscribe your class.
+
+```js
+class User extends Module {
+  constructor(props) {
+    super(props);
+
+    // ...
+
+    window.addEventListener("beforeunload", () => {
+      this.unsubscribe();
+    });
+  }
+
+  // ...
+}
+```
+
+### TypeScript Usage
+
+You'll need to define a type for your dispatch and state props. The best way to explain how to do this is just by example.
+
+You can see a full, commented, implemented example of `newton-redux-reborn` [here](examples/typescript.ts).
